@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-const Table = ({ columns, rows, format, pageLimit = 25 }) => {
+const Table = ({ className, columns, rows, format, pageLimit = 25 }) => {
   const [page, setPage] = useState(0);
 
   const previousPage = (event) => {
@@ -19,7 +19,7 @@ const Table = ({ columns, rows, format, pageLimit = 25 }) => {
 
   return (
     <div>
-      <table>
+      <table className={className}>
         <thead>
           <tr>
             {columns.map((col) => (
@@ -42,11 +42,14 @@ const Table = ({ columns, rows, format, pageLimit = 25 }) => {
         </tbody>
       </table >
 
-      <p>Showing {start + 1} - {start + rows.slice(start, end).length} of {rows.length} routes.</p>
-
-      <div>
-        <button onClick={previousPage} disabled={page === 0}>Previous Page</button>
-        <button onClick={nextPage} disabled={start + pageLimit >= rows.length}>Next Page</button>
+      <div className="pagination">
+        <p>
+          Showing {start + 1}-{start + rows.slice(start, end).length} of {rows.length} routes.
+        </p>
+        <p>
+          <button onClick={previousPage} disabled={page === 0}>Previous Page</button>
+          <button onClick={nextPage} disabled={start + pageLimit >= rows.length}>Next Page</button>
+        </p>
       </div>
     </div>
   )

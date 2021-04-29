@@ -10,26 +10,24 @@ const Select = ({ options, idName, property, title, onSelect, value = "all" }) =
   }
 
   return (
-    <div>
-      <select id={idName} onChange={handleChange}>
-        <option
-          value={value}
-          selected={value === "all" ? true : false}
-          disabled={value === "all" ? "" : "disabled"}
+    <select id={idName} onChange={handleChange}>
+      <option
+        value={value}
+        selected={value === "all" ? true : false}
+        disabled={value === "all" ? "" : "disabled"}
+      >
+        {title}
+      </option>
+      {options.map(option => {
+        return <option
+          key={uuidv4()}
+          value={option[property]}
+          disabled={option.disabled}
         >
-          {title}
+          {option.name}
         </option>
-        {options.map(option => {
-          return <option
-            key={uuidv4()}
-            value={option[property]}
-            disabled={option.disabled}
-          >
-            {option.name}
-          </option>
-        })}
-      </select>
-    </div>
+      })}
+    </select>
   )
 }
 

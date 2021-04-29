@@ -99,38 +99,35 @@ const App = () => {
         <h1 className="title">Airline Routes</h1>
       </header>
       <section>
+        <Map routes={filteredRoutes} />
         <p>
-          Welcome to the app!
-        </p>
-      </section>
-      <Map routes={filteredRoutes} />
-      <div>
-        Show routes on
+          Show routes on
           <Select
-          options={combinedAirlines}
-          idName={"airlines"}
-          property={"id"}
-          title={"All Airlines"}
-          onSelect={handleAirline}
-          value={airline}
-        />
-
+            options={combinedAirlines}
+            idName={"airlines"}
+            property={"id"}
+            title={"All Airlines"}
+            onSelect={handleAirline}
+            value={airline}
+          />
           flying in or out of
-
           <Select
-          options={combinedAirports}
-          idName={"airports"}
-          property={"code"}
-          title={"All Airports"}
-          onSelect={handleAirport}
-          value={airport}
-        />
+            options={combinedAirports}
+            idName={"airports"}
+            property={"code"}
+            title={"All Airports"}
+            onSelect={handleAirport}
+            value={airport}
+          />
+          <button onClick={clearFilters} disabled={defaultSelected}>Show All Routes</button>
+        </p>
 
-      </div>
-
-      <button onClick={clearFilters} disabled={defaultSelected}>Show All Routes</button>
-
-      <Table columns={columns} rows={filteredRoutes} format={formatValue} />
+        <Table
+          className="routes-table"
+          columns={columns}
+          rows={filteredRoutes}
+          format={formatValue} />
+      </section>
     </div >
   );
 };

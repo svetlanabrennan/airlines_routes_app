@@ -8,6 +8,7 @@ body {
   padding: 2rem;
   color: white;
   text-align: center;
+  display: block;
 }
 
 .title {
@@ -16,6 +17,7 @@ body {
 
 section {
   text-align: center;
+  display: block;
 }
 
 table.routes-table {
@@ -46,8 +48,16 @@ select {
   width: 90%;
 }
 
-.pagination a {
+.pagination button {
   margin: 0 .5em;
+}
+
+button {
+  margin: 10px;
+}
+
+.pagination p {
+  text-align: center;
 }
 
 svg circle:hover {
