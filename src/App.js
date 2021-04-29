@@ -8,7 +8,7 @@ import './App.css';
 const App = () => {
   const [airline, setAirline] = useState("all");
   const [airport, setAirport] = useState("all");
-
+  const [reset, setReset] = useState(false)
 
   const columns = [
     { name: "Airline", property: "airline" },
@@ -26,20 +26,16 @@ const App = () => {
   };
 
   const handleAirline = (value) => {
-    console.log(value)
     if (value !== "all") {
       value = parseInt(value, 10);
     }
     setAirline(value);
   }
 
-  console.log(airline)
-
   const handleAirport = (value) => {
     setAirport(value);
   }
 
-  console.log(airline, airport);
 
   const filteredRoutes = routes.filter(route => {
     return (
@@ -126,12 +122,11 @@ const App = () => {
           className="routes-table"
           columns={columns}
           rows={filteredRoutes}
-          format={formatValue} />
+          format={formatValue}
+        />
       </section>
     </div >
   );
 };
 
 export default App;
-
-// FIX showing 1- this number of ##

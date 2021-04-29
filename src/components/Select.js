@@ -4,9 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 const Select = ({ options, idName, property, title, onSelect, value = "all" }) => {
   function handleChange(event) {
     event.preventDefault();
-    onSelect(event.target.value)
-    console.log("passed in value", value)
-    console.log(event.target.value)
+    onSelect(event.target.value);
   }
 
   return (
