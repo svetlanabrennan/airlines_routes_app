@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { routes } from './data'
+import { routes, getAirlineById, getAirportByCode } from './data'
 import Table from './components/Table'
 import './App.css';
 
@@ -11,6 +11,16 @@ const App = () => {
     { name: "Destination Airport", property: "dest" },
   ];
 
+
+  // returns the human friendly value for property
+  const formatValue = (property, value) => {
+    if (property === "airline") {
+      return getAirlineById(value).name;
+    } else {
+      return getAirportByCode(value).name;
+    }
+  };
+
   return (
     <div className="app">
       <header className="header">
@@ -21,7 +31,7 @@ const App = () => {
           Welcome to the app!
         </p>
       </section>
-      <Table columns={columns} routes={routes} />
+      <Table columns={columns} rows={routes} format={formatValue} />
     </div>
   );
 };
