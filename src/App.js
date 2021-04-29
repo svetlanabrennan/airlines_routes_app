@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import { routes, airlines, airports } from './data'
+import { routes } from './data'
+import Table from './components/Table'
 import './App.css';
 
 const App = () => {
+
+  const columns = [
+    { name: "Airline", property: "airline" },
+    { name: "Source Airport", property: "src" },
+    { name: "Destination Airport", property: "dest" },
+  ];
 
   return (
     <div className="app">
@@ -12,8 +19,9 @@ const App = () => {
       <section>
         <p>
           Welcome to the app!
-    </p>
+        </p>
       </section>
+      <Table columns={columns} routes={routes} />
     </div>
   );
 };
