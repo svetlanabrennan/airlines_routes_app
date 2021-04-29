@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const Table = ({ columns, rows, format, pageLimit = 25 }) => {
   const [page, setPage] = useState(0);
@@ -31,7 +32,7 @@ const Table = ({ columns, rows, format, pageLimit = 25 }) => {
         <tbody>
           {rows.slice(start, end).map((route) => {
             return (
-              <tr>
+              <tr key={uuidv4()}>
                 <td>{format("airline", route.airline)}</td>
                 <td>{format("src", route.src)}</td>
                 <td>{format("desc", route.dest)}</td>

@@ -15,7 +15,6 @@ const App = () => {
     { name: "Destination Airport", property: "dest" },
   ];
 
-
   // returns the human friendly value for property
   const formatValue = (property, value) => {
     if (property === "airline") {
@@ -53,8 +52,6 @@ const App = () => {
 
   let filteredAirlineCodes = filteredAirlines.map(airline => airline.id);
 
-
-
   // add disable select option for unavailable airlines
   unavailableAirlines.map(airline => airline.disabled = "disabled");
 
@@ -65,12 +62,6 @@ const App = () => {
       return airline = Object.assign(airline, { disabled: "disabled" });
     }
   })
-
-
-  // // combine available and unavailable airlines
-  // let combinedAirlines = filteredAirlines.concat(unavailableAirlines).sort((a, b) => {
-  //   return a.id - b.id
-  // });
 
   // airports that have a selected route
   const filteredAirports = airports.filter(airport => {
@@ -95,10 +86,6 @@ const App = () => {
   }
 
   const defaultSelected = airline === "all" && airport === "all";
-
-
-  // console.log(combinedAirlines)
-  console.log(airline, airport)
 
   return (
     <div className="app">
