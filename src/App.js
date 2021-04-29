@@ -94,6 +94,9 @@ const App = () => {
     setAirport("all");
   }
 
+  const defaultSelected = airline === "all" && airport === "all";
+
+
   // console.log(combinedAirlines)
   console.log(airline, airport)
 
@@ -116,7 +119,6 @@ const App = () => {
           title={"All Airlines"}
           onSelect={handleAirline}
           value={airline}
-          selected={airline}
         />
 
           flying in or out of
@@ -128,12 +130,11 @@ const App = () => {
           title={"All Airports"}
           onSelect={handleAirport}
           value={airport}
-          selected={airport}
         />
 
       </div>
 
-      <button onClick={clearFilters}>Show All Routes</button>
+      <button onClick={clearFilters} disabled={defaultSelected}>Show All Routes</button>
 
       <Table columns={columns} rows={filteredRoutes} format={formatValue} />
     </div >
