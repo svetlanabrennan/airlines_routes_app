@@ -42,11 +42,11 @@ const Table = ({ columns, rows, format, pageLimit = 25 }) => {
         </tbody>
       </table >
 
-      <p>Showing {start + 1} - {end} of {rows.length}</p>
+      <p>Showing {start + 1} - {start + rows.slice(start, end).length} of {rows.length} routes.</p>
 
       <div>
         <button onClick={previousPage} disabled={page === 0}>Previous Page</button>
-        <button onClick={nextPage} disabled={end + pageLimit >= rows.length}>Next Page</button>
+        <button onClick={nextPage} disabled={start + pageLimit >= rows.length}>Next Page</button>
       </div>
     </div>
   )

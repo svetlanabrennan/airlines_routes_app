@@ -26,15 +26,20 @@ const App = () => {
   };
 
   const handleAirline = (value) => {
+    console.log(value)
     if (value !== "all") {
       value = parseInt(value, 10);
     }
     setAirline(value);
   }
 
+  console.log(airline)
+
   const handleAirport = (value) => {
     setAirport(value);
   }
+
+  console.log(airline, airport);
 
   const filteredRoutes = routes.filter(route => {
     return (
