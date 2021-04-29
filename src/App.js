@@ -51,13 +51,26 @@ const App = () => {
   // airlines with unavailable routes
   let unavailableAirlines = airlines.filter(airline => !filteredAirlines.find(air => air.id === airline.id))
 
+  let filteredAirlineCodes = filteredAirlines.map(airline => airline.id);
+
+
+
   // add disable select option for unavailable airlines
   unavailableAirlines.map(airline => airline.disabled = "disabled");
 
-  // combine available and unavailable airlines
-  const combinedAirlines = filteredAirlines.concat(unavailableAirlines).sort((a, b) => {
-    return a.id - b.id
-  });
+  let combinedAirlines = airlines.map(airline => {
+    if (filteredAirlineCodes.includes(airline.id)) {
+      return airline = Object.assign(airline, { disabled: "" })
+    } else {
+      return airline = Object.assign(airline, { disabled: "disabled" });
+    }
+  })
+
+
+  // // combine available and unavailable airlines
+  // let combinedAirlines = filteredAirlines.concat(unavailableAirlines).sort((a, b) => {
+  //   return a.id - b.id
+  // });
 
   // airports that have a selected route
   const filteredAirports = airports.filter(airport => {
@@ -68,13 +81,21 @@ const App = () => {
   const filteredAirportCodes = filteredAirports.map(airport => airport.code);
 
   // add disabled to select option for unavailable airports
-  const combinedAirports = airports.map(airport => {
+  let combinedAirports = airports.map(airport => {
     if (filteredAirportCodes.includes(airport.code)) {
-      return airport
+      return airport = Object.assign(airport, { disabled: "" })
     } else {
       return airport = Object.assign(airport, { disabled: "disabled" });
     }
   })
+
+  const clearFilters = () => {
+    setAirline("all");
+    setAirport("all");
+  }
+
+  // console.log(combinedAirlines)
+  console.log(airline, airport)
 
   return (
     <div className="app">
@@ -94,6 +115,8 @@ const App = () => {
           property={"id"}
           title={"All Airlines"}
           onSelect={handleAirline}
+          value={airline}
+          selected={airline}
         />
 
           flying in or out of
@@ -104,12 +127,19 @@ const App = () => {
           property={"code"}
           title={"All Airports"}
           onSelect={handleAirport}
+          value={airport}
+          selected={airport}
         />
 
       </div>
+
+      <button onClick={clearFilters}>Show All Routes</button>
+
       <Table columns={columns} rows={filteredRoutes} format={formatValue} />
     </div >
   );
 };
 
 export default App;
+
+// FIX showing 1- this number of ##
