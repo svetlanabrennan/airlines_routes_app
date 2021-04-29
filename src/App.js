@@ -36,6 +36,46 @@ const App = () => {
     setAirport(value);
   }
 
+  const filteredRoutes = routes.filter(route => {
+    return (
+      (route.airline === airline || airline === "all") &&
+      (route.src === airport || route.dest === airport || airport === "all")
+    );
+  });
+
+  // airlines that have a selected route
+  const filteredAirlines = airlines.filter(airline => {
+    return filteredRoutes.find(route => route.airline === airline.id);
+  })
+
+  // airlines with unavailable routes
+  let unavailableAirlines = airlines.filter(airline => !filteredAirlines.find(air => air.id === airline.id))
+
+  // add disable select option for unavailable airlines
+  unavailableAirlines.map(airline => airline.disabled = "disabled");
+
+  // combine available and unavailable airlines
+  const combinedAirlines = filteredAirlines.concat(unavailableAirlines).sort((a, b) => {
+    return a.id - b.id
+  });
+
+  // airports that have a selected route
+  const filteredAirports = airports.filter(airport => {
+    return filteredRoutes.find(route => route.src === airport.code || route.dest === airport.code);
+  })
+
+  // airport codes that have a selected route
+  const filteredAirportCodes = filteredAirports.map(airport => airport.code);
+
+  // add disabled to select option for unavailable airports
+  const combinedAirports = airports.map(airport => {
+    if (filteredAirportCodes.includes(airport.code)) {
+      return airport
+    } else {
+      return airport = Object.assign(airport, { disabled: "disabled" });
+    }
+  })
+
   return (
     <div className="app">
       <header className="header">
@@ -49,7 +89,7 @@ const App = () => {
       <div>
         Show routes on
           <Select
-          options={airlines}
+          options={combinedAirlines}
           idName={"airlines"}
           property={"id"}
           title={"All Airlines"}
@@ -59,7 +99,7 @@ const App = () => {
           flying in or out of
 
           <Select
-          options={airports}
+          options={combinedAirports}
           idName={"airports"}
           property={"code"}
           title={"All Airports"}
@@ -67,7 +107,7 @@ const App = () => {
         />
 
       </div>
-      <Table columns={columns} rows={routes} format={formatValue} />
+      <Table columns={columns} rows={filteredRoutes} format={formatValue} />
     </div >
   );
 };

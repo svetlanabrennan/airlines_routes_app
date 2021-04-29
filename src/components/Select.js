@@ -11,7 +11,7 @@ const Select = ({ options, idName, property, title, onSelect }) => {
       <select id={idName} onChange={handleChange}>
         <option value="all">{title}</option>
         {options.map(option => {
-          return <option value={option[property]}>{option.name}</option>
+          return <option value={option[property]} disabled={option.disabled}>{option.name}</option>
         })}
       </select>
     </div>
